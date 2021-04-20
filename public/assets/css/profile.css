@@ -3,3 +3,66 @@
     border-radius: 50%;
 }
 #centerContainer { width: 1100px; text-align: left; margin: 0px auto; }
+
+#loginOrSignup{
+    font-family: 'Poppins', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');
+@import url('https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css');
+
+h1{
+    font-family: 'Poppins', sans-serif;
+    }
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(17,17,23);
+    color: white;
+}
+
+.jumbotron{
+    background-color:rgb(29, 29, 34);
+    color: rgb(227,12,15)
+
+}
+
+.btn{
+    background-color: rgb(243,56,36);
+    color: white;
+    border: 1px solid #FC5130;
+}
+
+.btn:hover{
+  
+    background-color: tomato;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1px solid #FC5130;
+    color: white;
+}
+
+#signUp{
+    font-family: 'Poppins', sans-serif;
+    background-color:rgb(29, 29, 34);
+    color: rgb(227,12,15)
+}
+#login{
+    font-family: 'Poppins', sans-serif;
+    background-color:rgb(29, 29, 34);
+    color: rgb(227,12,15)
+}
+#nav{
+    font-family: 'Poppins', sans-serif;
+    background-color:rgb(29, 29, 34);
+    color: rgb(227,12,15)
+}
+#userProfile{
+    font-family: 'Poppins', sans-serif;
+    background-color:rgb(29, 29, 34);
+    color: rgb(227,12,15)
+}
+
+
+

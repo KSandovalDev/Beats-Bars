@@ -75,6 +75,7 @@ var upload = multer({storage: storage});
       $set: {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
+        age: req.body.age,
         imgPath: 'images/uploads/' + req.file.filename,
         userId: uId,
         matchedUsers: [],

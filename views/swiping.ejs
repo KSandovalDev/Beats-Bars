@@ -9,16 +9,18 @@
 <body>
 
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <h1></span> Swipe</h1>
+        <a href="/home" class="btn btn-default btn-sm">Profile</a>
         <a href="/swiping" class="btn btn-default btn-sm">Swipe</a>
+        <a href="/chat" class="btn btn-default btn-sm">Chat</a>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
 
       </div>
   
 
 <div class="container">
     <header><h1> User Profile</h1></header>
-    <button><a href="/userSetup">Set Up your profile<a></button>
+    <button><a href="/userSetup">Set Up or Edit your profile<a></button>
 
 
 <!-- if you want to display a string in EJS use = if you wanna display code use - -->
@@ -33,10 +35,10 @@
                <p><%= result[i].instrument %>, level :<%= result[i].instrumentLevel %></p>
                <p><%= result[i].instagramLink %></p>
                <p><%= result[i].looking %></p>
-               <%- result[i].spotifyCode %>
-               <%- result[i].youtubeCode %>
-               <%- result[i].soundCloudCode %>
-                <% } %>
+               <p><%- result[i].spotifyCode %></p>
+               <p><%- result[i].youtubeCode %></p>
+               <p><%- result[i].soundCloudCode %></p>
+                <!-- <% } %> -->
         </div>
 </div>
 </body>

@@ -8,15 +8,17 @@
 </head>
 <body>
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    <div class="page-header text-center" id="nav">
+        <h1></span> Profile</h1>
+        <a href="/home" class="btn btn-default btn-sm">Profile</a>
         <a href="/swiping" class="btn btn-default btn-sm">Swipe</a>
+        <a href="/chat" class="btn btn-default btn-sm">Chat</a>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
 
-      </div>
+    </div>
   
 
-<div class="container">
+<div class="container" id="userProfile">
     <header><h1> User Profile</h1></header>
     <button><a href="/userSetup">Set Up your profile<a></button>
 
@@ -37,25 +39,6 @@
                <%- result[i].youtubeCode %>
                <%- result[i].soundCloudCode %> -->
                 <% } %>
-                
-                <!-- firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        imgPath: 'images/uploads/' + req.file.filename,
-        userId: uId,
-        matchedUsers: [],
-        bio:req.body.bio,
-        soundCloudCode:req.body.soundCloudCode,
-        youtubeCode:req.body.youtubeCode,
-        spotifyCode:req.body.spotifyCode,
-        genre1:req.body.genre1,
-        genre2:req.body.genre2,
-        genre3:req.body.genre3,
-        genre4:req.body.genre4,
-        instrument:req.body.instrument,
-        instrumentLevel:req.body.instrumentLevel,
-        looking:req.body.looking,
-        influences:req.body.influences,
-        instagramLink:req.body.instagramLink -->
         </div>
 </div>
 </body>
