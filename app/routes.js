@@ -1,4 +1,19 @@
-module.exports = function (app, passport, db) {
+module.exports = function (app, passport, db, multer, ObjectId) {
+
+
+
+// Image Upload Code =========================================================================
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/images/uploads')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now() + ".png")
+  }
+});
+var upload = multer({storage: storage});
+
+
 
 
   // normal routes ===============================================================
@@ -10,10 +25,29 @@ module.exports = function (app, passport, db) {
 
   // PROFILE SECTION =========================
   app.get('/home', isLoggedIn, function (req, res) {
+    let uId = ObjectId(req.session.passport.user)
+    db.collection('userprofile').updateOne(
+      { username: req.user.local.email },
+     { $setOnInsert: { username: req.user.local.email } },
+     { upsert: true },
+   ),
+   db.collection('userprofile').find({userId: uId}).toArray((err, result) => {
+    if (err) return console.log(err)
+    console.log(result)
     res.render('profile.ejs', {
-      user: req.user,
+      result : result
     })
-  });
+  })})
+
+  app.get('/swiping', isLoggedIn, function (req, res) {
+   db.collection('userprofile').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    console.log(result)
+    result = result.filter(data=>data.username !== req.user.local.email)
+    res.render('swiping.ejs', {
+      result : result
+    })
+  })})
 
   app.post("/home",
     upload.array("photos", 10), function (req, res) {
@@ -22,6 +56,64 @@ module.exports = function (app, passport, db) {
       res.redirect("/home")
     }
   );
+
+  //Handle Get request for  user setup page
+  app.get('/userSetup', isLoggedIn, function (req, res) {
+    res.render('usersetup.ejs', {
+      user: req.user,
+    })
+  });
+
+
+
+  app.post('/userSetup', upload.single('file-to-upload'), (req, res, next) => {
+    let uId = ObjectId(req.session.passport.user)
+    db.collection('userprofile')
+    .findOneAndUpdate({
+      username: req.user.local.email
+    }, {
+      $set: {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        imgPath: 'images/uploads/' + req.file.filename,
+        userId: uId,
+        matchedUsers: [],
+        bio:req.body.bio,
+        soundCloudCode:req.body.soundCloudCode,
+        youtubeCode:req.body.youtubeCode,
+        spotifyCode:req.body.spotifyCode,
+        genre1:req.body.genre1,
+        genre2:req.body.genre2,
+        genre3:req.body.genre3,
+        genre4:req.body.genre4,
+        instrument:req.body.instrument,
+        instrumentLevel:req.body.instrumentLevel,
+        looking:req.body.looking,
+        influences:req.body.influences,
+        instagramLink:req.body.instagramLink
+      }
+    }, {
+      sort: {
+        _id: -1
+      },
+      upsert: true
+    }, (err, result) => {
+      if (err) return res.send(err)
+      res.redirect(`/home`)
+    })
+})
+
+    
+
+
+
+
+
+
+
+
+
+
 
   // LOGOUT ==============================
   app.get('/logout', function (req, res) {
@@ -39,42 +131,15 @@ module.exports = function (app, passport, db) {
     })
   })
 
-  app.put('/messages', (req, res) => {
-    db.collection('messages')
-      .findOneAndUpdate({ name: req.body.name, msg: req.body.msg }, {
-        $set: {
-          thumbUp: req.body.thumbUp + 1
-        }
-      }, {
-        sort: { _id: -1 },
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-  })
 
-  app.put('/messages/down', (req, res) => {
-    db.collection('messages')
-      .findOneAndUpdate({ name: req.body.name, msg: req.body.msg }, {
-        $set: {
-          thumbUp: req.body.thumbUp - 1
-        }
-      }, {
-        sort: { _id: -1 },
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-  })
 
-  app.delete('/messages', (req, res) => {
-    db.collection('messages').findOneAndDelete({ name: req.body.name, msg: req.body.msg }, (err, result) => {
-      if (err) return res.send(500, err)
-      res.send('Message deleted!')
-    })
-  })
+
+  // app.delete('/messages', (req, res) => {
+  //   db.collection('messages').findOneAndDelete({ name: req.body.name, msg: req.body.msg }, (err, result) => {
+  //     if (err) return res.send(500, err)
+  //     res.send('Message deleted!')
+  //   })
+  // })
 
   // =============================================================================
   // AUTHENTICATE (FIRST LOGIN) ==================================================
@@ -102,6 +167,7 @@ module.exports = function (app, passport, db) {
 
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
+ 
     successRedirect: '/home', // redirect to the secure home section
     failureRedirect: '/signup', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
@@ -133,10 +199,5 @@ function isLoggedIn(req, res, next) {
 
   res.redirect('/');
 }
-var multer  = require('multer');
-//  FILE UPLOAD ROUTES AND PROFILE FORM====================================================/
-const upload = multer({
-  dest: "/path/to/temporary/directory/to/store/uploads/files"
-  // you might also want to set some limits: https://github.com/expressjs/multer#limits
-});
+
 

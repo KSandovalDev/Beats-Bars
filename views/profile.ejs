@@ -4,163 +4,59 @@
     <title>Beats & Bars</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
 </head>
 <body>
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <a href="/swiping" class="btn btn-default btn-sm">Swipe</a>
+
+      </div>
+  
+
 <div class="container">
     <header><h1> User Profile</h1></header>
-    <form action="/home" method="POST" enctype='multipart/form-data'>
-        <input type="file" name="photos" multiple>
-        <label for="photos"></label>
-        <h2>Enter your bio</h2>
-        <textarea name="bio" id="" cols="30" rows="10"></textarea>
-        <input type="submit" name="submit" id="" value="submit">
-        <h2>Select 4 Genres</h2>
-        <!-- GENRES SELECTS==================================================================================================-->
-        <div class="genres">
-            <label for="genre-select">Genres</label>
-            <select name="genres" id="genre-select">
-                <option value="Hip-Hop">Hip-Hop</option>
-                <option value="Trap">Trap</option>
-                <option value="Soul/R&B">Soul/R&B</option>
-                <option value="Reggae">Reggae</option>
-                <option value="Dancehall">Dancehall</option>
-                <option value="Pop">Pop</option>
-                <option value="Reggaeton">Reggaeton</option>
-                <option value="Bachata/Salsa">Bachata/Salsa</option>
-                <option value="Indie">Indie</option>
-                <option value="Singer/Songwriter">Singer/Songwriter</option>
-                <option value="Afrobeat">Afrobeat</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Latin Jazz">Latin Jazz</option>
-                <option value="Funk">Funk</option>
-                <option value="Rock">Rock</option>
-                <option value="Alternative">Alternative</option>
-                <option value="Prog Rock">Prog Rock</option>
-                <option value="Fusion">Fusion</option>
-                <option value="Country">Country</option>
-                <option value="Punk">Punk</option>
-                <option value="Metal">Metal</option>
-                <option value="Blues">Blues</option>
-            </select>
+    <button><a href="/userSetup">Set Up your profile<a></button>
+
+
+<!-- if you want to display a string in EJS use = if you wanna display code use - -->
+        <div>
+            <% for(let i =0;i<result.length;i++){ %>
+                <img src="<%= result[i].imgPath %>" alt="" class="avatar">
+               <p><%= result[i].firstname %></p>
+               <p><%= result[i].lastname %></p>
+               <p><%= result[i].bio %></p>
+               <p><%= result[i].genre1 %>, <%= result[i].genre2 %>, <%= result[i].genre3 %>, <%= result[i].genre4 %></p>
+               <p><%= result[i].influences %></p>
+               <p><%= result[i].instrument %>, level :<%= result[i].instrumentLevel %></p>
+               <p><%= result[i].instagramLink %></p>
+               <p><%= result[i].looking %></p>
+               <!-- <%- result[i].spotifyCode %>
+               <%- result[i].youtubeCode %>
+               <%- result[i].soundCloudCode %> -->
+                <% } %>
+                
+                <!-- firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        imgPath: 'images/uploads/' + req.file.filename,
+        userId: uId,
+        matchedUsers: [],
+        bio:req.body.bio,
+        soundCloudCode:req.body.soundCloudCode,
+        youtubeCode:req.body.youtubeCode,
+        spotifyCode:req.body.spotifyCode,
+        genre1:req.body.genre1,
+        genre2:req.body.genre2,
+        genre3:req.body.genre3,
+        genre4:req.body.genre4,
+        instrument:req.body.instrument,
+        instrumentLevel:req.body.instrumentLevel,
+        looking:req.body.looking,
+        influences:req.body.influences,
+        instagramLink:req.body.instagramLink -->
         </div>
-        <div class="genres">
-            <label for="genre-select">Genres</label>
-            <select name="genres" id="genre-select">
-                <option value="Hip-Hop">Hip-Hop</option>
-                <option value="Trap">Trap</option>
-                <option value="Soul/R&B">Soul/R&B</option>
-                <option value="Reggae">Reggae</option>
-                <option value="Dancehall">Dancehall</option>
-                <option value="Pop">Pop</option>
-                <option value="Reggaeton">Reggaeton</option>
-                <option value="Bachata/Salsa">Bachata/Salsa</option>
-                <option value="Indie">Indie</option>
-                <option value="Singer/Songwriter">Singer/Songwriter</option>
-                <option value="Afrobeat">Afrobeat</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Latin Jazz">Latin Jazz</option>
-                <option value="Funk">Funk</option>
-                <option value="Rock">Rock</option>
-                <option value="Alternative">Alternative</option>
-                <option value="Prog Rock">Prog Rock</option>
-                <option value="Fusion">Fusion</option>
-                <option value="Country">Country</option>
-                <option value="Punk">Punk</option>
-                <option value="Metal">Metal</option>
-                <option value="Blues">Blues</option>
-            </select>
-        </div>
-        <div class="genres">
-            <label for="genre-select">Genres</label>
-            <select name="genres" id="genre-select">
-                <option value="Hip-Hop">Hip-Hop</option>
-                <option value="Trap">Trap</option>
-                <option value="Soul/R&B">Soul/R&B</option>
-                <option value="Reggae">Reggae</option>
-                <option value="Dancehall">Dancehall</option>
-                <option value="Pop">Pop</option>
-                <option value="Reggaeton">Reggaeton</option>
-                <option value="Bachata/Salsa">Bachata/Salsa</option>
-                <option value="Indie">Indie</option>
-                <option value="Singer/Songwriter">Singer/Songwriter</option>
-                <option value="Afrobeat">Afrobeat</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Latin Jazz">Latin Jazz</option>
-                <option value="Funk">Funk</option>
-                <option value="Rock">Rock</option>
-                <option value="Alternative">Alternative</option>
-                <option value="Prog Rock">Prog Rock</option>
-                <option value="Fusion">Fusion</option>
-                <option value="Country">Country</option>
-                <option value="Punk">Punk</option>
-                <option value="Metal">Metal</option>
-                <option value="Blues">Blues</option>
-            </select>
-        </div>
-        <div class="genres">
-            <label for="genre-select">Genres</label>
-            <select name="genres" id="genre-select">
-                <option value="Hip-Hop">Hip-Hop</option>
-                <option value="Trap">Trap</option>
-                <option value="Soul/R&B">Soul/R&B</option>
-                <option value="Reggae">Reggae</option>
-                <option value="Dancehall">Dancehall</option>
-                <option value="Pop">Pop</option>
-                <option value="Reggaeton">Reggaeton</option>
-                <option value="Bachata/Salsa">Bachata/Salsa</option>
-                <option value="Indie">Indie</option>
-                <option value="Singer/Songwriter">Singer/Songwriter</option>
-                <option value="Afrobeat">Afrobeat</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Latin Jazz">Latin Jazz</option>
-                <option value="Funk">Funk</option>
-                <option value="Rock">Rock</option>
-                <option value="Alternative">Alternative</option>
-                <option value="Prog Rock">Prog Rock</option>
-                <option value="Fusion">Fusion</option>
-                <option value="Country">Country</option>
-                <option value="Punk">Punk</option>
-                <option value="Metal">Metal</option>
-                <option value="Blues">Blues</option>
-            </select>
-        </div> 
-        <!-- Instrument select============================================================================= -->
-        <div class="row">
-            <div class="col-md-6 col-sm-6">
-                  <div class="form-group">
-                      <select class="form-control">
-                          <option>Select Instrument</option>
-                          <option>Piano</option>
-                          <option>Bass</option>
-                          <option>Guitar</option>
-                          <option>Drums</option>
-                      </select>
-                  </div>
-               </div>
-               <div class="col-md-6 col-sm-6">
-                  <div class="form-group">
-                      <select class="form-control">
-                          <option>Select proficiency level</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                      </select>
-                  </div>
-               </div>
-            </div>
-        <!-- 
-        instruments : [{
-            instrument : String, - selects
-            proficiency : Number, - selects
-             }],
-        instagram    : String, - just has to be a link
-        spotify      : String, check out embedded links
-        soundcloud   : String, check out embedded links
-        youtube      : String, - iframe is needed
-        lookingfor   : String, - selects
-        influences   : [String], -->
-    </form>
 </div>
 </body>
 </html>
