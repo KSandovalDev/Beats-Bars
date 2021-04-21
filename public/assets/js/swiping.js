@@ -1,20 +1,25 @@
-// window.addEventListener('DOMContentLoaded', (event) => {
-//     document.getElementById("skip").addEventListener("click",swipeLeft)
-//     document.getElementById("play").addEventListener("click",swipeRight)
-//     console.log('DOM fully loaded and parsed');
-// });
-// console.log("LOADING!")
+window.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById("skip").addEventListener("click",swipeLeft)
+    document.getElementById("play").addEventListener("click",swipeRight)
+    console.log('DOM fully loaded and parsed');
+});
+console.log("LOADING!")
 
-// function swipeLeft() {
-//     console.log("WORKING!")
-//     document.querySelector(".stageProfile:last-child").classList.add("swipedLeft")
+function swipeLeft() {
+    console.log("WORKING!")
+    document.querySelector(".stageProfile:last-child").classList.add("swipedLeft")
 
-// }
+}
 
-// function swipeRight() {
-//     console.log("WORKING222!")
-//     document.querySelector(".stageProfile:last-child").classList.add("swipedRight")
-// }
+function swipeRight() {
+    console.log("WORKING222!")
+    document.querySelector(".stageProfile:last-child").classList.add("swipedRight");
+    let lastProfile = document.querySelector(".stageProfile:last-child");
+    lastProfile.ontransitionend = function(event) {
+        lastProfile.parentNode.removeChild(lastProfile);
+      }
+
+}
 
 
 // document.getElementById("play").addEventListener("click",likeUser)

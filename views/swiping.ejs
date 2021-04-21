@@ -35,7 +35,7 @@
                         <h3>Bio: <%= result[i].bio %></h3>
                         <h3>Genres: <%= result[i].genre1 %>, <%= result[i].genre2 %>, <%= result[i].genre3 %>, <%= result[i].genre4 %></h3>
                         <h3>Influences: <%= result[i].influences %></h3>
-                        <h3>Instruments & Level <%= result[i].instrument %>, level :<%= result[i].instrumentLevel %></h3>
+                        <h3>Instruments & Level <%= result[i].instrument %>, Level: <%= result[i].instrumentLevel %></h3>
                         <h3>Instagram: <%= result[i].instagramLink %></h3>
                         <h3>Looking for: <%= result[i].looking %></p>
                         <p><%- result[i].spotifyCode %></p>
@@ -45,7 +45,8 @@
                 <% } %>
             </div>
     </div>
-    <!-- <button class="swipeLeft" id="skip">Skip</button> -->
+    <button class="swipeLeft" id="skip">Skip</button>
+    <button class="swipeRight " id="play">Play</button>
    
 </body>
 </html>

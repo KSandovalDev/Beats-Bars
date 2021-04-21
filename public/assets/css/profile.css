@@ -69,7 +69,7 @@ body {
     background-color: #143109;
     margin-top: 45px;
     margin-bottom: 45px;
-    /* position: absolute; */
+    position: absolute;
     height: 900px;
     overflow: scroll;
     width: 100%;
@@ -83,7 +83,7 @@ body {
     transform: translateX(-140%);
 }
 .cardsContainer{
-    /* position: relative; */
+    position: relative;
     height: 990px;
     margin-top: 45px;
     margin-bottom: 45px;

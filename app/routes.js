@@ -82,8 +82,6 @@ var upload = multer({storage: storage});
         })
    })})})
 
-  
-  
 
 
   app.post('/userSetup', upload.single('file-to-upload'), (req, res, next) => {
