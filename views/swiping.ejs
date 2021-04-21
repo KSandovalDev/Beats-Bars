@@ -5,41 +5,47 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/profile.css">
+    <script type="text/javascript" src="assets/js/swiping.js"></script>
 </head>
 <body>
-
     <div class="page-header text-center">
         <h1></span> Swipe</h1>
         <a href="/home" class="btn btn-default btn-sm">Profile</a>
         <a href="/swiping" class="btn btn-default btn-sm">Swipe</a>
+        <a href="/matches" class="btn btn-default btn-sm">Matches</a>
         <a href="/chat" class="btn btn-default btn-sm">Chat</a>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
 
-      </div>
-  
+    </div>
 
-<div class="container">
-    <header><h1> User Profile</h1></header>
-    <button><a href="/userSetup">Set Up or Edit your profile<a></button>
-
-
-<!-- if you want to display a string in EJS use = if you wanna display code use - -->
-        <div>
-            <% for(let i =0;i<result.length;i++){ %>
-                <img src="<%= result[i].imgPath %>" alt="" class="avatar">
-               <p><%= result[i].firstname %></p>
-               <p><%= result[i].lastname %></p>
-               <p><%= result[i].bio %></p>
-               <p><%= result[i].genre1 %>, <%= result[i].genre2 %>, <%= result[i].genre3 %>, <%= result[i].genre4 %></p>
-               <p><%= result[i].influences %></p>
-               <p><%= result[i].instrument %>, level :<%= result[i].instrumentLevel %></p>
-               <p><%= result[i].instagramLink %></p>
-               <p><%= result[i].looking %></p>
-               <p><%- result[i].spotifyCode %></p>
-               <p><%- result[i].youtubeCode %></p>
-               <p><%- result[i].soundCloudCode %></p>
-                <!-- <% } %> -->
-        </div>
-</div>
+    <div class="container">
+        <header><h1> The Stage</h1></header>
+    <!-- if you want to display a string in EJS use = if you wanna display code use - -->
+            <div class="cardsContainer">
+                <% for(let i =0;i<result.length;i++){ %>
+                    <div class="stageProfile">
+                        <img src="<%= result[i].imgPath %>" alt="" class="avatar"> 
+                        <form action="/likeUser" method="POST" >
+                            <input type="text" name="userEmail" value="<%= result[i].username %>" hidden>
+                            <button class="play" type="submit">Play</button>
+                        </form>
+                        <h3>First Name: <%= result[i].firstname %></h3>
+                        <h3>Last Name: <%= result[i].lastname %></h3>
+                        <h3><%= result[i].name %>, <%= result[i].age %></h3>
+                        <h3>Bio: <%= result[i].bio %></h3>
+                        <h3>Genres: <%= result[i].genre1 %>, <%= result[i].genre2 %>, <%= result[i].genre3 %>, <%= result[i].genre4 %></h3>
+                        <h3>Influences: <%= result[i].influences %></h3>
+                        <h3>Instruments & Level <%= result[i].instrument %>, level :<%= result[i].instrumentLevel %></h3>
+                        <h3>Instagram: <%= result[i].instagramLink %></h3>
+                        <h3>Looking for: <%= result[i].looking %></p>
+                        <p><%- result[i].spotifyCode %></p>
+                        <p><%- result[i].youtubeCode %></p>
+                        <p><%- result[i].soundCloudCode %></p>
+                    </div>
+                <% } %>
+            </div>
+    </div>
+    <!-- <button class="swipeLeft" id="skip">Skip</button> -->
+   
 </body>
 </html>

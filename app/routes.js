@@ -33,7 +33,6 @@ var upload = multer({storage: storage});
    ),
    db.collection('userprofile').find({userId: uId}).toArray((err, result) => {
     if (err) return console.log(err)
-    console.log(result)
     res.render('profile.ejs', {
       result : result
     })
@@ -42,7 +41,6 @@ var upload = multer({storage: storage});
   app.get('/swiping', isLoggedIn, function (req, res) {
    db.collection('userprofile').find().toArray((err, result) => {
     if (err) return console.log(err)
-    console.log(result)
     result = result.filter(data=>data.username !== req.user.local.email)
     res.render('swiping.ejs', {
       result : result
@@ -64,6 +62,28 @@ var upload = multer({storage: storage});
     })
   });
 
+  app.get('/matches', isLoggedIn, function (req, res) {
+    db.collection('userprofile').find({username: req.user.local.email}).toArray((err, result) => {
+     if (err) return console.log(err)
+    let emails = result[0].peopleILiked.filter(email=>result[0].usersWhoLikedMe.includes(email))
+      
+   
+      db.collection('userprofile').find().toArray((err, Finalresult) => {
+        if (err) return console.log(err)
+    
+        var filtered = []
+           for(var email in emails){
+            filtered.push(Finalresult.filter(data=>data.username == emails[email]))
+            }
+          
+            console.log(filtered)
+        res.render('matches.ejs',{
+          filtered: filtered,
+        })
+   })})})
+
+  
+  
 
 
   app.post('/userSetup', upload.single('file-to-upload'), (req, res, next) => {
@@ -78,8 +98,10 @@ var upload = multer({storage: storage});
         age: req.body.age,
         imgPath: 'images/uploads/' + req.file.filename,
         userId: uId,
-        matchedUsers: [],
+        peopleILiked: [],
+        usersWhoLikedMe: [],
         bio:req.body.bio,
+        name:req.user.username,
         soundCloudCode:req.body.soundCloudCode,
         youtubeCode:req.body.youtubeCode,
         spotifyCode:req.body.spotifyCode,
@@ -104,10 +126,37 @@ var upload = multer({storage: storage});
     })
 })
 
-    
 
 
-
+app.post('/likeUser', (req, res) => {
+//// LINE 132 TODO
+  // ADD EMAIL TO LIKED ARRAY ONLY IF EMAIL IS NOT ALREADY IN THERE
+  //update peopleILiked
+  db.collection('userprofile')
+  .findOneAndUpdate({username:req.user.local.email}, {
+    $push: {
+      peopleILiked:req.body.userEmail
+      }
+  }, {
+  sort: {_id: 1},
+   upsert: false
+  }, (err, result) => {
+    if (err) return res.send(err)
+    //update array of other person
+    db.collection('userprofile')
+    .findOneAndUpdate({username:req.body.userEmail}, {
+      $push: {
+        usersWhoLikedMe:req.user.local.email
+    }
+    }, {
+    sort: {_id: 1},
+     upsert: false
+ }, (err, result) => {
+      if (err) return res.send(err)
+      res.redirect('/swiping')
+    })
+  })
+})
 
 
 
@@ -200,5 +249,3 @@ function isLoggedIn(req, res, next) {
 
   res.redirect('/');
 }
-
-
