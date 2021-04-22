@@ -13,26 +13,31 @@ const multer = require('multer');
 const ObjectId = require('mongodb').ObjectID
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var configDB = require('./config/database.js');
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 
 var db
 
 // configuration ===============================================================
-mongoose.connect(configDB.url, (err, database) => {
+mongoose.connect(configDB.url, (err, client) => {
   if (err) return console.log(err)
-  db = database
+  db = client
+  console.log("connected to MONGO")
   require('./app/routes.js')(app, passport, db, multer, ObjectId);
-}); // connect to our database
 
+}); // connect to our database
+require('./app/socket.js')(io);
 require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser.json()); // get information from html forms
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json()); // get information from html forms
+app.use(express.urlencoded({ extended: true, }));
 app.use(express.static('public'))
 
 app.set('view engine', 'ejs'); // set up ejs for templating
@@ -49,5 +54,5 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // launch ======================================================================
-app.listen(port);
+server.listen(port);
 console.log('Quill dances on ' + port);

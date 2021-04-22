@@ -65,7 +65,11 @@ var upload = multer({storage: storage});
   app.get('/matches', isLoggedIn, function (req, res) {
     db.collection('userprofile').find({username: req.user.local.email}).toArray((err, result) => {
      if (err) return console.log(err)
-    let emails = result[0].peopleILiked.filter(email=>result[0].usersWhoLikedMe.includes(email))
+    let emails = []
+    if( result[0].peopleILiked && result[0].usersWhoLikedMe){
+    emails = result[0].peopleILiked.filter(email=>result[0].usersWhoLikedMe.includes(email))
+    }
+   
       
    
       db.collection('userprofile').find().toArray((err, Finalresult) => {
@@ -124,6 +128,13 @@ var upload = multer({storage: storage});
     })
 })
 
+
+app.get('/chat/:username', isLoggedIn, function (req, res) {
+  res.render('chat.ejs', {
+    user: req.user,
+    username: req.params.username,
+  })
+});
 
 
 app.post('/likeUser', (req, res) => {
