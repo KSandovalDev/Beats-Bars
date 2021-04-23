@@ -19,6 +19,7 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+const path = require('path')
 
 var db
 
@@ -38,9 +39,14 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(express.json()); // get information from html forms
 app.use(express.urlencoded({ extended: true, }));
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
+app.set('views', path.join(__dirname, 'views'))
 
 app.set('view engine', 'ejs'); // set up ejs for templating
+
+app.get('/', function (req, res) {
+  res.render('views/index.ejs');
+});
 
 // required for passport
 app.use(session({

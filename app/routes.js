@@ -19,9 +19,9 @@ var upload = multer({storage: storage});
   // normal routes ===============================================================
 
   // show the home page (will also have our login links)
-  app.get('/', function (req, res) {
-    res.render('index.ejs');
-  });
+  // app.get('/', function (req, res) {
+  //   res.render('views/index.ejs');
+  // });
 
   // PROFILE SECTION =========================
   app.get('/home', isLoggedIn, function (req, res) {
