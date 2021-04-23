@@ -13,10 +13,23 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/profile.css">
+    <link rel="stylesheet" href="assets/css/default.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/theme-orange.css">
   </head>
   <body id="setup">
+
+     <div class="page-header text-center">
+        <h1 class="mb-0 super effect-static-text">Beats & Bars</h1>
+            <div id="navBtns">
+                <a href="/home" class="btn btn-default btn-sm">Profile</a>
+                <a href="/swiping" class="btn btn-default btn-sm">Swipe</a>
+                <a href="/matches" class="btn btn-default btn-sm">Matches</a>
+                <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+            </div>
+    </div>
+
     <div class="container">
-      <header><h1>User Profile</h1></header>
       <form action="/userSetup" method="POST" enctype="multipart/form-data">
         <div>
           <label for="firstname">First Name:</label>
@@ -32,9 +45,9 @@
         </div>
         <input type="file" name="file-to-upload" required />
         <label for="photos"></label>
-        <h2>Enter your bio</h2>
+        <h2>Enter your bio: </h2>
         <textarea name="bio" id="" cols="30" rows="10" required></textarea>
-        <h2>Select 4 Genres</h2>
+        <h2>Select 4 Genres: </h2>
         <!-- GENRES SELECTS==================================================================================================-->
         <div class="genres">
           <label for="genre-select">Genres</label>
@@ -154,6 +167,7 @@
                 <option>Bass</option>
                 <option>Guitar</option>
                 <option>Drums</option>
+                <option>Voice</option>
               </select>
             </div>
           </div>
@@ -164,13 +178,12 @@
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
+                <option>4</option>
+                <option>5</option>
               </select>
             </div>
           </div>
         </div>
-        <!-- <div>
-                <iframe src="https://open.spotify.com/embed/track/33IHBjSXpamVSajAQ3wSER" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            </div> -->
         <div>
           <label for="url">Enter your Instagram URL</label>
 
@@ -207,10 +220,10 @@
           </select>
         </div>
         <div>
-          <h2>Influences</h2>
+          <h2>Influences: </h2>
           <input type="text" name="influences" id="influences" />
         </div>
-        <input type="submit" name="submit" id="" value="submit" />
+        <input type="submit" name="submit" id="profileSubmit" value="submit" />
         <!-- 
 
         lookingfor   : String, - selects

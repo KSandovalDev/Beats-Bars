@@ -5,40 +5,43 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/profile.css">
+    <link rel="stylesheet" href="/assets/css/default.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/theme-orange.css">
+
 </head>
 <body>
 
     <div class="page-header text-center" id="nav">
-        <h1></span> Profile</h1>
+        <h1 class="mb-0 super effect-static-text"> Beats & Bars</h1>
+    </div>
+
+    <div id="navBtns">
         <a href="/home" class="btn btn-default btn-sm">Profile</a>
         <a href="/swiping" class="btn btn-default btn-sm">Swipe</a>
         <a href="/matches" class="btn btn-default btn-sm">Matches</a>
-        <a href="/chat" class="btn btn-default btn-sm">Chat</a>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-
     </div>
   
 
 <div class="container" id="userProfile">
-    <header><h1> User Profile</h1></header>
-    <button><a href="/userSetup">Set Up or Edit your profile<a></button>
+    <button id="setProfile"><a href="/userSetup" id="editProfile">Set Up or Edit your profile<a></button>
 
 <!--    add descriptors to this ejs -->
 <!-- if you want to display a string in EJS use = if you wanna display code use - -->
-        <div>
+        <div id="personProfile">
             <% for(let i =0;i<result.length;i++){ %>
                 <img src="<%= result[i].imgPath %>" alt="" class="avatar">
-               <p><%= result[i].firstname %></p>
-               <p><%= result[i].lastname %></p>
-               <p><%= result[i].bio %></p>
-               <p><%= result[i].genre1 %>, <%= result[i].genre2 %>, <%= result[i].genre3 %>, <%= result[i].genre4 %></p>
-               <p><%= result[i].influences %></p>
-               <p><%= result[i].instrument %>, level :<%= result[i].instrumentLevel %></p>
-               <p><%= result[i].instagramLink %></p>
-               <p><%= result[i].looking %></p>
-               <!-- <%- result[i].spotifyCode %>
-               <%- result[i].youtubeCode %>
-               <%- result[i].soundCloudCode %> -->
+               <p><%= result[i].firstname %>, <%= result[i].lastname %></p>
+               <p>Bio: <%= result[i].bio %></p>
+               <p>Genres: <%= result[i].genre1 %>, <%= result[i].genre2 %>, <%= result[i].genre3 %>, <%= result[i].genre4 %></p>
+               <p>Influences: <%= result[i].influences %></p>
+               <p>Instrument & Proficiency <%= result[i].instrument %>, level :<%= result[i].instrumentLevel %></p>
+               <p>Instagram <%= result[i].instagramLink %></p>
+               <p> Looking for: <%= result[i].looking %></p>
+               <p><%- result[i].spotifyCode %></p>
+               <p><%- result[i].youtubeCode %></p>
+               <p><%- result[i].soundCloudCode %></p>
                 <% } %>
         </div>
 </div>

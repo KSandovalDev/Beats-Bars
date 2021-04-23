@@ -8,6 +8,10 @@ console.log("LOADING!")
 function swipeLeft() {
     console.log("WORKING!")
     document.querySelector(".stageProfile:last-child").classList.add("swipedLeft")
+    let lastProfile = document.querySelector(".stageProfile:last-child");
+    lastProfile.ontransitionend = function(event) {
+        lastProfile.parentNode.removeChild(lastProfile);
+      }
 
 }
 
